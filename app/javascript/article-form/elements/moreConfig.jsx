@@ -25,20 +25,16 @@ export default class MoreConfig extends Component {
     );
     if (passedData.allSeries.length > 0) {
       const seriesNames = passedData.allSeries.map(name => (
-        <button
-          name="series"
-          onClick={this.props.onConfigChange}
-          value={name}
-        >
+        <button name="series" onClick={this.props.onConfigChange} value={name}>
           {name}
         </button>
-        ));
+      ));
       seriesTip = (
         <small>
-Existing series:
+          Existing series:
           {seriesNames}
         </small>
-);
+      );
     }
     if (passedData.published) {
       publishedField = (
