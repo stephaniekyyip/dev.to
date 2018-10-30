@@ -66,9 +66,14 @@ module Api
         params["article"]["organization_id"] = if params["article"]["post_under_org"]
                                                  current_user.organization_id
                                                end
+        if params["article"]["series"].present?
+          params["article"]["collection_id"] = Collection.find_series(params["article"]["series"], current_user)&.id
+        elsif params["article"]["series"] == ""
+          params["article"]["collection_id"] = nil
+        end
         params.require(:article).permit(
           :title, :body_markdown, :user_id, :main_image, :published, :description,
-          :tag_list, :organization_id, :canonical_url
+          :tag_list, :organization_id, :canonical_url, :series, :collection_id
         )
       end
     end
