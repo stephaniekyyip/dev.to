@@ -2,7 +2,6 @@ import 'preact/devtools';
 import { h, Component } from 'preact';
 import linkState from 'linkstate';
 import ImageUploadIcon from 'images/image-upload.svg';
-import ImageUploadIcon from 'images/image-upload.svg';
 import ThreeDotsIcon from 'images/three-dots.svg';
 import { submitArticle, previewArticle } from './actions';
 import BodyMarkdown from './elements/bodyMarkdown';
