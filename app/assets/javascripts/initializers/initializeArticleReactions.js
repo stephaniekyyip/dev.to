@@ -1,35 +1,42 @@
 // Set reaction count to correct number
 function setReactionCount(reactionName, newCount) {
-  var reactionClassList = document.getElementById("reaction-butt-" + reactionName).classList;
-  var reactionNumber = document.getElementById("reaction-number-" + reactionName);
+  var reactionClassList = document.getElementById(
+    'reaction-butt-' + reactionName,
+  ).classList;
+  var reactionNumber = document.getElementById(
+    'reaction-number-' + reactionName,
+  );
   if (newCount > 0) {
-    reactionClassList.add("activated");
+    reactionClassList.add('activated');
     reactionNumber.innerHTML = newCount;
-
-  }
-  else {
-    reactionClassList.remove("activated");
-    reactionNumber.innerHTML = "";
+  } else {
+    reactionClassList.remove('activated');
+    reactionNumber.innerHTML = '';
   }
 }
 
 function showUserReaction(reactionName, animatedClass) {
-  document.getElementById("reaction-butt-" + reactionName).classList.add("user-activated", animatedClass);
+  document
+    .getElementById('reaction-butt-' + reactionName)
+    .classList.add('user-activated', animatedClass);
 }
 
 function hideUserReaction(reactionName) {
-  document.getElementById("reaction-butt-" + reactionName).classList.remove("user-activated", "user-animated");
+  document
+    .getElementById('reaction-butt-' + reactionName)
+    .classList.remove('user-activated', 'user-animated');
 }
 
 function hasUserReacted(reactionName) {
-  return document.getElementById("reaction-butt-" + reactionName)
-  .classList.contains("user-activated");
-
+  return document
+    .getElementById('reaction-butt-' + reactionName)
+    .classList.contains('user-activated');
 }
 
 function getNumReactions(reactionName) {
-  var num = document.getElementById("reaction-number-" + reactionName).innerHTML;
-  if (num == "") {
+  var num = document.getElementById('reaction-number-' + reactionName)
+    .innerHTML;
+  if (num == '') {
     return 0;
   }
   return parseInt(num);
@@ -50,12 +57,14 @@ function initializeArticleReactions() {
         ajaxReq.onreadystatechange = function() {
           if (ajaxReq.readyState == XMLHttpRequest.DONE) {
             var json = JSON.parse(ajaxReq.response);
-            json.article_reaction_counts.forEach(function (reaction) {
-              setReactionCount(reaction.category, reaction.count)
-            })
-            json.reactions.forEach(function (reaction) {
-              if (document.getElementById("reaction-butt-" + reaction.category)) {
-                showUserReaction(reaction.category, "not-user-animated");
+            json.article_reaction_counts.forEach(function(reaction) {
+              setReactionCount(reaction.category, reaction.count);
+            });
+            json.reactions.forEach(function(reaction) {
+              if (
+                document.getElementById('reaction-butt-' + reaction.category)
+              ) {
+                showUserReaction(reaction.category, 'not-user-animated');
               }
             });
           }
@@ -92,17 +101,19 @@ function reactToArticle(articleId, reaction) {
       hideUserReaction(reaction);
       setReactionCount(reaction, currentNum - 1);
     } else {
-      showUserReaction(reaction, "user-animated");
+      showUserReaction(reaction, 'user-animated');
       setReactionCount(reaction, currentNum + 1);
     }
   }
-  var userStatus = document.getElementsByTagName('body')[0].getAttribute('data-user-status');
-  if (userStatus == "logged-out") {
-    showModal("react-to-article");
+  var userStatus = document
+    .getElementsByTagName('body')[0]
+    .getAttribute('data-user-status');
+  if (userStatus == 'logged-out') {
+    showModal('react-to-article');
     return;
   } else {
     toggleReaction();
-    document.getElementById("reaction-butt-" + reaction).disabled = true;
+    document.getElementById('reaction-butt-' + reaction).disabled = true;
   }
 
   function createFormdata() {
@@ -122,15 +133,15 @@ function reactToArticle(articleId, reaction) {
     .then(function(response) {
       if (response.status === 200) {
         return response.json().then(() => {
-          document.getElementById("reaction-butt-" + reaction).disabled = false;
+          document.getElementById('reaction-butt-' + reaction).disabled = false;
         });
       } else {
         toggleReaction();
-        document.getElementById("reaction-butt-" + reaction).disabled = false;
+        document.getElementById('reaction-butt-' + reaction).disabled = false;
       }
     })
-    .catch(function (error) {
+    .catch(function(error) {
       toggleReaction();
-      document.getElementById("reaction-butt-" + reaction).disabled = false;
-    })
+      document.getElementById('reaction-butt-' + reaction).disabled = false;
+    });
 }

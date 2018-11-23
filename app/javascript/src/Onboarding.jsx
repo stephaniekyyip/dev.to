@@ -6,12 +6,13 @@ import OnboardingWelcomeThread from './components/OnboardingWelcomeThread';
 import cancelSvg from '../../assets/images/cancel.svg';
 import OnboardingProfile from './components/OnboardingProfile';
 
-const getContentOfToken = token => document.querySelector(`meta[name='${token}']`).content;
+const getContentOfToken = token =>
+  document.querySelector(`meta[name='${token}']`).content;
 const getFormDataAndAppend = array => {
   const form = new FormData();
   array.forEach(item => form.append(item.key, item.value));
   return form;
-}
+};
 
 class Onboarding extends Component {
   constructor() {
@@ -99,7 +100,9 @@ class Onboarding extends Component {
   handleBulkFollowUsers(users) {
     if (this.state.checkedUsers.length > 0 && !this.state.followRequestSent) {
       const csrfToken = getContentOfToken('csrf-token');
-      const formData = getFormDataAndAppend([{ key: 'users', value: JSON.stringify(users) }]);
+      const formData = getFormDataAndAppend([
+        { key: 'users', value: JSON.stringify(users) },
+      ]);
 
       fetch('/api/follows', {
         method: 'POST',
@@ -117,8 +120,10 @@ class Onboarding extends Component {
   }
 
   handleUserProfileSave() {
-      const csrfToken = getContentOfToken('csrf-token');
-      const formData = getFormDataAndAppend([{ key: 'user', value: JSON.stringify(this.state.profileInfo) }]);
+    const csrfToken = getContentOfToken('csrf-token');
+    const formData = getFormDataAndAppend([
+      { key: 'user', value: JSON.stringify(this.state.profileInfo) },
+    ]);
 
     fetch('/onboarding_update', {
       method: 'PATCH',
@@ -150,7 +155,7 @@ class Onboarding extends Component {
     const formData = getFormDataAndAppend([
       { key: 'followable_type', value: 'Tag' },
       { key: 'followable_id', value: tag.id },
-      { key: 'verb', value: tag.following ? 'unfollow' : 'follow' }
+      { key: 'verb', value: tag.following ? 'unfollow' : 'follow' },
     ]);
 
     this.setState({
@@ -271,7 +276,7 @@ class Onboarding extends Component {
     document.getElementsByTagName('body')[0].classList.remove('modal-open');
     const csrfToken = getContentOfToken('csrf-token');
     const formData = getFormDataAndAppend([
-      { key: 'saw_onboarding', value: true }
+      { key: 'saw_onboarding', value: true },
     ]);
 
     if (window.ga && ga.create) {
