@@ -7,6 +7,7 @@ We use the following testing tools:
 - [**chromedriver-helper**](https://github.com/flavorjones/chromedriver-helper) for standard JS testing
 - [**guard-rspec**](https://github.com/guard/guard-rspec) for automated testing
 - [**Jest**](https://facebook.github.io/jest) for testing in the front-end
+- [**preact-render-spy**](https://github.com/mzgoddard/preact-render-spy) for testing Preact components.
 - [**SimpleCov**](https://github.com/colszowka/simplecov) for tracking overall test coverage
 
 Each pull request should come with tests related to the newly written feature or bug fix. Ideally, we should test both the front end and back end.

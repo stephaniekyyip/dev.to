@@ -5,4 +5,10 @@ FactoryBot.define do
     reactable_type { "Article" }
     category { "like" }
   end
+
+  factory :reading_reaction, class: "Reaction" do
+    user
+    reactable { create(:article) }
+    category { "readinglist" }
+  end
 end

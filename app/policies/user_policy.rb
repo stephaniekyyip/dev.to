@@ -76,6 +76,7 @@ class UserPolicy < ApplicationPolicy
        feed_admin_publish_permission
        feed_mark_canonical
        feed_url
+       gitlab_url
        linkedin_url
        location
        looking_for_work
@@ -102,7 +103,8 @@ class UserPolicy < ApplicationPolicy
        summary
        text_color_hex
        username
-       website_url]
+       website_url
+       export_requested]
   end
 
   private
