@@ -24,23 +24,17 @@ function initializeUserSidebar(user) {
       document.getElementById('tag-separator').innerHTML =
         'Follow tags to improve your feed';
     }
-    followedTags.forEach(function(t) {
-      renderedTagsCount++;
-      tagHTML =
-        tagHTML +
-        '<div class="sidebar-nav-element" id="sidebar-element-' +
-        t.name +
-        '">\
-                            <a class="sidebar-nav-link" href="/t/' +
-        t.name +
-        '">\
-                            <span class="sidebar-nav-tag-text">#' +
-        t.name +
-        '</span>\
+    followedTags.forEach(function(t){
+      renderedTagsCount++
+      if (t.points > 0.0) {
+        tagHTML = tagHTML + '<div class="sidebar-nav-element" id="sidebar-element-'+t.name+'">\
+                            <a class="sidebar-nav-link" href="/t/'+t.name+'">\
+                            <span class="sidebar-nav-tag-text">#'+t.name+'</span>\
                             </a>\
                             </div>';
-      if (document.getElementById('default-sidebar-element-' + t.name)) {
-        document.getElementById('default-sidebar-element-' + t.name).remove();
+      }
+      if (document.getElementById("default-sidebar-element-"+t.name)){
+        document.getElementById("default-sidebar-element-"+t.name).remove();
       }
     });
     document.getElementById('sidebar-nav-followed-tags').innerHTML = tagHTML;
